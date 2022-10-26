@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frameweb:FramewebProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:frameweb="http://nemo.inf.ufes.br/projects/frameweb/FW-2015" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <compose xsi:type="frameweb:EntityModel" name="Entity Model">
+    <packagedElement xsi:type="frameweb:DomainPackage" name="Entity Package">
+      <packagedElement xsi:type="frameweb:DomainClass" name="Bee">
+        <ownedAttribute xsi:type="frameweb:IdAttribute" name="id" isID="true">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/number"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="name" visibility="private" isUnique="false">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="email" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="password" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DomainClass" name="Beehive">
+        <ownedAttribute xsi:type="frameweb:IdAttribute" name="id">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/number"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="name" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DomainAssociation" name="Is Owned By" memberEnd="//@compose.0/Entity%20Package/Is%20Owned%20By/Source //@compose.0/Entity%20Package/Is%20Owned%20By/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/Is%20Owned%20By/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/Is%20Owned%20By/Target"/>
+        <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/Is%20Owned%20By"/>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/Beehive" association="//@compose.0/Entity%20Package/Is%20Owned%20By">
+          <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        </ownedEnd>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Bee" association="//@compose.0/Entity%20Package/Is%20Owned%20By"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DomainClass" name="Honeycomb">
+        <ownedAttribute xsi:type="frameweb:IdAttribute" name="SKU">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="name" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="description" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/string"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="quantity" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="frameweb/languages/Typescript.frameweb#//@compose.0/number"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="expiry" visibility="private">
+          <type xsi:type="uml:Class" href="frameweb/languages/Typescript.frameweb#//@compose.0/Date"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="dateIn" visibility="private">
+          <type xsi:type="uml:Class" href="frameweb/languages/Typescript.frameweb#//@compose.0/Date"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="dateOut" visibility="private">
+          <type xsi:type="uml:Class" href="frameweb/languages/Typescript.frameweb#//@compose.0/Date"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DomainAssociation" name="Is In" memberEnd="//@compose.0/Entity%20Package/Is%20In/Source //@compose.0/Entity%20Package/Is%20In/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/Is%20In/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/Is%20In/Target"/>
+        <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/Is%20In"/>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/Honeycomb" association="//@compose.0/Entity%20Package/Is%20In">
+          <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        </ownedEnd>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Beehive" association="//@compose.0/Entity%20Package/Is%20In"/>
+      </packagedElement>
+    </packagedElement>
+  </compose>
+</frameweb:FramewebProject>
