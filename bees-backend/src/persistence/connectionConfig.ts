@@ -1,14 +1,17 @@
 import { Service } from "typedi"
 import { DataSource } from "typeorm"
+import * as dotenv from 'dotenv'
 
+dotenv.config()
 const AppDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
+    host: process.env["HOST"],
     port: 5432,
-    username: process.env["POSTGRES_USERNAME"],
+    username: process.env["POSTGRES_USER"],
     password: process.env["POSTGRES_PASSWORD"],
     database: "bees",
 })
+
 
 @Service()
 export class DataSourceClass {

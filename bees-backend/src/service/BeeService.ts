@@ -4,7 +4,7 @@ import { BeeRepository } from "../persistence/repositoies/BeeRepository";
 const jwt = require('jsonwebtoken');
 
 @Service()
-class BeeService{
+export class BeeService{
     @Inject()
     beeRepo!: BeeRepository
 

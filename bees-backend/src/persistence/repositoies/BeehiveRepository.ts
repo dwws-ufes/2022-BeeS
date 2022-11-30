@@ -9,12 +9,10 @@ export class BeehiveRepository {
     repo: Repository<Beehive>
     beeRepo: Repository<Bee>
 
-    @Inject()
-    dataSource!: DataSourceClass
 
-    constructor(){
-        this.repo = this.dataSource.dataSource.getRepository(Beehive)
-        this.beeRepo = this.dataSource.dataSource.getRepository(Bee)
+    constructor(public dataSource: DataSourceClass){
+        this.repo = dataSource.dataSource.getRepository(Beehive)
+        this.beeRepo = dataSource.dataSource.getRepository(Bee)
     }
 
     async getBeehivesOfUser(email: string, pageNo: number, pageSize: number, name?: string){

@@ -1,13 +1,17 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { Request as JWTRequest } from "express-jwt"
 import { Inject, Service } from "typedi";
 import { BeehiveRepository } from "../persistence/repositoies/BeehiveRepository";
 import { BeeRepository } from "../persistence/repositoies/BeeRepository";
+import { HoneycombRepository } from "../persistence/repositoies/HoneycombRepository";
 
 @Service()
-class BeehiveService{
+export class BeehiveService{
     @Inject()
     beehiveRepo!: BeehiveRepository
+
+    @Inject()
+    honeycombRepo!: HoneycombRepository
 
     @Inject()
     beeRepo!: BeeRepository

@@ -7,11 +7,8 @@ import { Bee } from "../models/Bee";
 export class BeeRepository {
     repo: Repository<Bee>
 
-    @Inject()
-    dataSource!: DataSourceClass
-
-    constructor(){
-        this.repo = this.dataSource.dataSource.getRepository(Bee)
+    constructor(public dataSource: DataSourceClass){
+        this.repo = dataSource.dataSource.getRepository(Bee)
     }
 
     async getBeeLogin(email: string, password: string){

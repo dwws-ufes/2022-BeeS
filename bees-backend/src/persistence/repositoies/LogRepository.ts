@@ -7,10 +7,7 @@ import { Log } from "../models/Log";
 export class LogRepository {
     repo: Repository<Log>
 
-    @Inject()
-    dataSource!: DataSourceClass
-
-    constructor(){
-        this.repo = this.dataSource.dataSource.getRepository(Log)
+    constructor(public dataSource: DataSourceClass){
+        this.repo = dataSource.dataSource.getRepository(Log)
     }
 }
