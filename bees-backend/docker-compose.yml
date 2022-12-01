@@ -14,6 +14,14 @@ services:
       - postgres
     restart: unless-stopped
 
+  pgweb:
+    container_name: bees-database-manager
+    image: sosedoff/pgweb
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+
   app:
     container_name: bees-app
     build: .
@@ -27,6 +35,8 @@ services:
 
 volumes:
   postgres:
+  pgadmin:
 
 networks:
   postgres:
+    driver: bridge
