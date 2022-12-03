@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMan
 import { Bee } from "./Bee"
 import { Honeycomb } from "./Honeycomb"
 
-@Entity()
+@Entity({ name: "beehive" })
 export class Beehive {
     @PrimaryGeneratedColumn()
     id!: number

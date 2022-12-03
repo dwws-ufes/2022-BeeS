@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, OneToMany, ManyT
 import { Beehive } from "./Beehive"
 import { Log } from "./Log"
 
-@Entity()
+@Entity({ name: "honeycomb" })
 export class Honeycomb {
     @PrimaryColumn()
     sku!: string

@@ -9,9 +9,8 @@ const AppDataSource = new DataSource({
     port: 5432,
     username: process.env["POSTGRES_USER"],
     password: process.env["POSTGRES_PASSWORD"],
-    database: "bees",
+    database: process.env["POSTGRES_USER"]
 })
-
 
 @Service()
 export class DataSourceClass {
@@ -20,6 +19,8 @@ export class DataSourceClass {
         this.dataSource = AppDataSource
     }
 }
+
+export default AppDataSource
 
 AppDataSource.initialize()
     .then(() => {

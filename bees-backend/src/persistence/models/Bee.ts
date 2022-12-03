@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTabl
 import { Beehive } from "./Beehive"
 import { Log } from "./Log"
 
-@Entity()
+@Entity({ name: "bee" })
 export class Bee {
     @PrimaryGeneratedColumn()
     id!: number
@@ -10,7 +10,7 @@ export class Bee {
     @Column()
     name!: string
 
-    @Column()
+    @Column({ unique: true })
     email!: string
 
     @Column()

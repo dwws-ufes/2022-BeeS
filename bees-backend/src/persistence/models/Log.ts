@@ -8,7 +8,7 @@ export enum EditType {
     QTD_EDITED
 }
 
-@Entity()
+@Entity({ name: "log" })
 export class Log {
     @PrimaryGeneratedColumn()
     id!: number
