@@ -3,6 +3,8 @@ import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm
 export class insertModels1669937797311 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query("CREATE EXTENSION IF NOT EXISTS pgcrypto;")
+        
         await queryRunner.createTable(
             new Table({
                 name: "bee",
@@ -103,7 +105,8 @@ export class insertModels1669937797311 implements MigrationInterface {
                 {
                     name: "beehive",
                     type: "int",
-                    isNullable: false
+                    isNullable: false,
+                    isPrimary: true
                 }
             ]
         }))
@@ -138,6 +141,10 @@ export class insertModels1669937797311 implements MigrationInterface {
                     name: "honeycomb",
                     type: "varchar",
                     isNullable: false
+                },{
+                    name: "beehive",
+                    type: "int",
+                    isNullable: false
                 }
             ]
         }))
@@ -150,8 +157,8 @@ export class insertModels1669937797311 implements MigrationInterface {
         }))
         
         await queryRunner.createForeignKey("log", new TableForeignKey({
-            columnNames: ["honeycomb"],
-            referencedColumnNames: ["sku"],
+            columnNames: ["honeycomb", "beehive"],
+            referencedColumnNames: ["sku", "beehive"],
             referencedTableName: "honeycomb",
             onDelete: "CASCADE"
         }))

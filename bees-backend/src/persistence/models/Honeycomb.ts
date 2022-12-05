@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, OneToMany, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, OneToMany, ManyToOne, JoinColumn } from "typeorm"
 import { Beehive } from "./Beehive"
 import { Log } from "./Log"
 
@@ -26,6 +26,7 @@ export class Honeycomb {
     dateOut!: Date
 
     @ManyToOne(() => Beehive, (beehive) => beehive.items)
+    @JoinColumn({ name: "beehive" })
     beehive!: Beehive
 
     @OneToMany(() => Log, (log) => log.honeycomb)

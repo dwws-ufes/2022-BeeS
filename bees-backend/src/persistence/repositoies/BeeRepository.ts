@@ -45,4 +45,19 @@ export class BeeRepository {
             password: () => `crypt('${password}', gen_salt('bf'))`
         })
     }
+
+    async deleteBee(email: string, password: string){
+        const bee = await this.repo.findOne({
+            select: {
+                name: true,
+                id: true,
+                email: true
+            },
+            where: {
+                email,
+                password: Raw((alias) => `${alias} = crypt('${password}', password)`)
+            }
+        })
+        return await this.repo.delete({ email })
+    }
 }

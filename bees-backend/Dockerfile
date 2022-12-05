@@ -17,4 +17,4 @@ ADD . ${APPHOME}
 
 RUN yarn build
 
-CMD ["node", "build/src/app.js", "--unhandled-rejections=strict"]
+CMD ["node", "build/src/index.js", "--unhandled-rejections=strict"]

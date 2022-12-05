@@ -1,6 +1,8 @@
 import { NextFunction, Response } from "express";
 import { Request as JWTRequest } from "express-jwt";
 import { Inject, Service } from "typedi";
+import AppError from "../customError/customAppError";
+import { BeehiveRepository } from "../persistence/repositoies/BeehiveRepository";
 import { BeeRepository } from "../persistence/repositoies/BeeRepository";
 import { HoneycombRepository } from "../persistence/repositoies/HoneycombRepository";
 
@@ -12,89 +14,100 @@ export class HoneycombService{
     @Inject()
     beeRepo!: BeeRepository
 
-    async create(req: JWTRequest, res: Response, next: NextFunction){
-        try{
-            const auth = req.auth
-            if(auth === undefined || auth === null){
-                return res.status(401).send({
-                    status: "ERROR",
-                    message: "No token found"
+    @Inject()
+    beehiveRepo!: BeehiveRepository
+
+    create(){
+        return async (req: JWTRequest, res: Response, next: NextFunction) => {
+            try{
+                const auth = req.auth
+                if(auth === undefined || auth === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "No token found"
+                    })
+                }
+                const user = await this.beeRepo.getBeeByEmail(auth.email)
+                if(user === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "Token invalid"
+                    })
+                }
+                const { beehive, sku, name, description, quantity, expiry } = req.body
+                const beehiveObj = await this.beehiveRepo.getBeehiveById(beehive, user.email)
+                if(beehiveObj === null){
+                    return res.status(401).json({
+                        status: "ERROR",
+                        message: "Not authorized to create honeycomb in this beehive"
+                    })
+                }
+                await this.honeycombRepo.createHoneycomb(beehive, sku, name, description, quantity, new Date(expiry))
+                return res.send({
+                    status: "OK",
+                    message: "Honeycomb created"
                 })
+            }catch(e){
+                console.error(e)
+                if(e instanceof AppError){ return res.status(e.code).send({status: "ERROR", message: e.message}) }else{ return res.status(500).send({status: "error", message: (e as Error).message}) }
             }
-            const user = await this.beeRepo.getBeeByEmail(auth.email)
-            if(user === null){
-                return res.status(401).send({
-                    status: "ERROR",
-                    message: "Token invalid"
-                })
-            }
-            const { beehiveId, sku, name, description, quantity, expiry } = req.body
-            await this.honeycombRepo.createHoneycomb(beehiveId, sku, name, description, quantity, new Date(expiry))
-            return res.send({
-                status: "OK",
-                message: "Honeycomb created"
-            })
-        }catch(e){
-            console.error(e)
-            return res.status(500).send(e)
         }
     }
 
-    async get(req: JWTRequest, res: Response, next: NextFunction){
-        try{
-            const auth = req.auth
-            if(auth === undefined || auth === null){
-                return res.status(401).send({
-                    status: "ERROR",
-                    message: "No token found"
+    get(){
+        return async (req: JWTRequest, res: Response, next: NextFunction) => {
+            try{
+                const auth = req.auth
+                if(auth === undefined || auth === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "No token found"
+                    })
+                }
+                const user = await this.beeRepo.getBeeByEmail(auth.email)
+                if(user === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "Token invalid"
+                    })
+                }
+                const { id, beehiveId } = req.params
+                const beehive = await this.beehiveRepo.getBeehiveById(Number(beehiveId), user.email)
+                if(beehive === null){
+                    return res.status(401).json({
+                        status: "ERROR",
+                        message: "Unauthorized to get honeycombs from this beehive"
+                    })
+                }
+                const honeycomb = await this.honeycombRepo.getHoneycombById(id, Number(beehiveId))
+                if(honeycomb === null){
+                    return res.status(404).json({
+                        status: "ERROR",
+                        message: "Honeycomb not found"
+                    })
+                }
+                return res.send({
+                    status: "OK",
+                    honeycomb
                 })
+            }catch(e){
+                console.error(e)
+                if(e instanceof AppError){ return res.status(e.code).send({status: "ERROR", message: e.message}) }else{ return res.status(500).send({status: "error", message: (e as Error).message}) }
             }
-            const user = await this.beeRepo.getBeeByEmail(auth.email)
-            if(user === null){
-                return res.status(401).send({
-                    status: "ERROR",
-                    message: "Token invalid"
-                })
-            }
-        }catch(e){
-            console.error(e)
-            return res.status(500).send(e)
         }
     }
 
-    async getHoneycombsOfBeehive(req: JWTRequest, res: Response, next: NextFunction){
-        try{
-            const auth = req.auth
-            if(auth === undefined || auth === null){
-                return res.status(401).send({
-                    status: "ERROR",
-                    message: "No token found"
-                })
-            }
-            const user = await this.beeRepo.getBeeByEmail(auth.email)
-            if(user === null){
-                return res.status(401).send({
-                    status: "ERROR",
-                    message: "Token invalid"
-                })
-            }
-            const { beehiveId, name, pageNo, pageSize } = req.body
-            const honeycombs = await this.honeycombRepo.getHoneycombsOfBeehive(beehiveId, pageNo, pageSize, name)
-            return res.send({
-                status: "OK",
-                honeycombs
-            })
-        }catch(e){
-            console.error(e)
-            return res.status(500).send(e)
+    update(){
+        return async (req: JWTRequest, res: Response, next: NextFunction) => {
+
         }
-    }
-
-    async update(req: JWTRequest, res: Response, next: NextFunction){
 
     }
 
-    async delete(req: JWTRequest, res: Response, next: NextFunction){
+    delete(){
+        return async (req: JWTRequest, res: Response, next: NextFunction) => {
+
+        }
 
     }
 }

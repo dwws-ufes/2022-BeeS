@@ -1,6 +1,10 @@
 import { Service } from "typedi"
 import { DataSource } from "typeorm"
 import * as dotenv from 'dotenv'
+import { Bee } from "./models/Bee"
+import { Beehive } from "./models/Beehive"
+import { Honeycomb } from "./models/Honeycomb"
+import { Log } from "./models/Log"
 
 dotenv.config()
 const AppDataSource = new DataSource({
@@ -9,7 +13,9 @@ const AppDataSource = new DataSource({
     port: 5432,
     username: process.env["POSTGRES_USER"],
     password: process.env["POSTGRES_PASSWORD"],
-    database: process.env["POSTGRES_USER"]
+    database: process.env["POSTGRES_USER"],
+    entities: [Bee, Beehive, Honeycomb, Log],
+    logging: "all"
 })
 
 @Service()

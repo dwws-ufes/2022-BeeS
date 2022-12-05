@@ -6,6 +6,6 @@ export const beeRoutes = Router()
 
 const beeService = Container.get(BeeService)
 
-beeRoutes.post("/register", beeService.register)
+beeRoutes.post("/register", beeService.register())
 
-beeRoutes.post("/login", beeService.login)
+beeRoutes.post("/login", beeService.login())

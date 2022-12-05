@@ -22,7 +22,17 @@ export class Bee {
     @OneToMany(() => Log, (log) => log.bee)
     logs!: Log[]
 
-    @ManyToMany(() => Beehive, (bee) => bee.admins, { cascade: true })
-    @JoinTable()
+    @ManyToMany(() => Beehive, (bee) => bee.admins)
+    @JoinTable({
+        name: "bee_admin_beehive",
+        joinColumn: {
+            name: "bee_id",
+            referencedColumnName: "id",
+        },
+        inverseJoinColumn: {
+            name: "beehive_id",
+            referencedColumnName: "id"
+        }
+    })
     beehivesAdmin!: Beehive[]
 }

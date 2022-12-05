@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "5d817ec7-353e-4418-9105-01d92db22d6c",
+    "colName": "BeeS",
+    "created": "2022-12-03T12:15:09.620Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "e9f944c0-ce30-4ff0-97e5-b5e4601d3f05",
+        "name": "Bees",
+        "containerId": "",
+        "created": "2022-12-03T12:15:36.008Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "678204f0-2649-4258-b982-dcf0b35428ab",
+        "name": "Beehives",
+        "containerId": "",
+        "created": "2022-12-03T12:15:44.983Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "e9b39695-78a9-4a16-94f1-ec7c71bb5496",
+        "name": "Honeycombs",
+        "containerId": "",
+        "created": "2022-12-03T12:16:04.424Z",
+        "sortNum": 30000
+      },
+      {
+        "_id": "ae800d48-8e8a-480c-a2ff-3850152daf5c",
+        "name": "Logs",
+        "containerId": "",
+        "created": "2022-12-03T12:16:10.205Z",
+        "sortNum": 40000
+      }
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
 import { Bee } from "./Bee"
 import { Honeycomb } from "./Honeycomb"
 
@@ -17,8 +17,16 @@ export class Log {
     type!: EditType
 
     @ManyToOne(() => Bee, (bee) => bee.logs)
+    @JoinColumn({ name: "bee" })
     bee!: Bee
 
     @ManyToOne(() => Honeycomb, (honeycomb) => honeycomb.logs)
+    @JoinColumn([
+        {
+            name: "honeycomb"
+        },{
+            name: "beehive"
+        }
+    ])
     honeycomb!: Honeycomb
 }
