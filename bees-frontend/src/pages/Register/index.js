@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Column, Text, Input, Button } from "components";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../api";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
 
-  function handleNavigate13() {
-    navigate("/");
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  function criarConta() {
+    register(name, email, password)
+      .then(() => navigate("/"))
+      .catch((e) => console.log("Error: ", e.message))
   }
 
   return (
@@ -23,6 +30,10 @@ const RegisterPage = () => {
               Nome
             </Text>
             <Input
+              onChange={(e) => {
+                setName(e.target.value)
+              }}
+              value={name}
               className="w-[100%]"
               wrapClassName="flex h-[31px] md:ml-[4px] ml-[7px] mt-[4px] sm:mx-[0] sm:w-[100%] w-[99%]"
               name="Input"
@@ -38,10 +49,14 @@ const RegisterPage = () => {
               Email
             </Text>
             <Input
+              onChange={(e) => {
+                setEmail(e.target.value)
+              }}
+              value={email}
               className="w-[100%]"
               wrapClassName="flex h-[31px] md:ml-[4px] ml-[7px] mt-[4px] sm:mx-[0] sm:w-[100%] w-[99%]"
               name="Input One"
-              placeholder=""
+              placeholder="example@email.com"
             ></Input>
           </Column>
           <Column className="flex flex-col justify-end sm:mt-[33px] md:mt-[43px] mt-[63px] sm:mx-[0] p-[4px] sm:px-[0] sm:w-[100%] w-[97%]">
@@ -53,15 +68,20 @@ const RegisterPage = () => {
               Senha
             </Text>
             <Input
+              onChange={(e) => {
+                setPassword(e.target.value)
+              }}
+              value={password}
               className="w-[100%]"
               wrapClassName="flex h-[31px] ml-[4px] mt-[4px] sm:mx-[0] sm:w-[100%] w-[97%]"
               name="Input Two"
               placeholder=""
+              type="password"
             ></Input>
           </Column>
           <Button
             className="common-pointer cursor-pointer font-bold sm:mb-[30px] md:mb-[39px] mb-[58px] min-w-[21%] sm:mt-[33px] md:mt-[43px] mt-[63px] text-[15px] text-center w-[max-content]"
-            onClick={handleNavigate13}
+            onClick={criarConta}
             shape="RoundedBorder19"
             size="sm"
             variant="FillYellow600"

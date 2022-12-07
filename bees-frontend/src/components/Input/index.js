@@ -10,6 +10,7 @@ const shapes = { RoundedBorder14: "rounded-radius14" };
 const Input = React.forwardRef(
   (
     {
+      onChange = () => {},
       wrapClassName = "",
       className = "",
       name,
@@ -22,9 +23,10 @@ const Input = React.forwardRef(
       suffix,
       shape,
       variant,
+      value = "",
       ...restProps
     },
-    ref
+    ref,
   ) => {
     return (
       <>
@@ -36,6 +38,8 @@ const Input = React.forwardRef(
           {!!label && label}
           {!!prefix && prefix}
           <input
+            value={value}
+            onChange={onChange}
             ref={ref}
             className={`${className} bg-transparent border-0`}
             type={type}
@@ -52,6 +56,8 @@ const Input = React.forwardRef(
 );
 
 Input.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.string,
   wrapClassName: PropTypes.string,
   className: PropTypes.string,
   name: PropTypes.string,
@@ -61,6 +67,8 @@ Input.propTypes = {
   variant: PropTypes.oneOf(["OutlineBlack900"]),
 };
 Input.defaultProps = {
+  onChange: () => {},
+  value: "",
   wrapClassName: "",
   className: "",
   name: "",

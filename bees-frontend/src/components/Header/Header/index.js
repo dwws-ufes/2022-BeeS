@@ -2,15 +2,21 @@ import React from "react";
 
 import { Row, Button } from "components";
 import { useNavigate } from "react-router-dom";
+import { isLoggedIn, loggout } from "api";
 
 const Header = (props) => {
   const navigate = useNavigate();
 
-  function handleNavigate() {
+  function loggoutTrigg() {
+    loggout()
     navigate("/");
   }
-  function handleNavigate1() {
+  function pagDash() {
     navigate("/dashboard");
+  }
+
+  function pagLog() {
+    navigate("/login");
   }
 
   return (
@@ -31,28 +37,42 @@ const Header = (props) => {
                   BeeS
                 </a>
               </li>
-              <li className="w-[max-content] sm:w-[100%] sm:my-[10px] min-w-[9%] text-center">
-                <Button
-                  className="common-pointer cursor-pointer font-bold font-inter text-[15px] text-center"
-                  onClick={handleNavigate1}
-                  shape="RoundedBorder19"
-                  size="sm"
-                  variant="FillBlack902"
-                >
-                  Dashboard
-                </Button>
-              </li>
-              <li className="w-[max-content] sm:w-[100%] sm:my-[10px] min-w-[9%] text-center">
-                <Button
-                  className="common-pointer cursor-pointer font-bold font-inter text-[15px] text-center"
-                  onClick={handleNavigate}
-                  shape="RoundedBorder19"
-                  size="sm"
-                  variant="FillBlack902"
-                >
-                  Deslogar
-                </Button>
-              </li>
+              {
+                isLoggedIn() ? (<>
+                  <li className="w-[max-content] sm:w-[100%] sm:my-[10px] min-w-[9%] text-center">
+                    <Button
+                      className="common-pointer cursor-pointer font-bold font-inter text-[15px] text-center"
+                      onClick={pagDash}
+                      shape="RoundedBorder19"
+                      size="sm"
+                      variant="FillBlack902"
+                    >
+                      Dashboard
+                    </Button>
+                  </li>
+                  <li className="w-[max-content] sm:w-[100%] sm:my-[10px] min-w-[9%] text-center">
+                    <Button
+                      className="common-pointer cursor-pointer font-bold font-inter text-[15px] text-center"
+                      onClick={loggoutTrigg}
+                      shape="RoundedBorder19"
+                      size="sm"
+                      variant="FillBlack902"
+                    >
+                      Deslogar
+                    </Button>
+                  </li></>
+                ) : (<>
+                  <Button
+                    className="common-pointer cursor-pointer font-bold min-w-[9%] ml-[1091px] sm:ml-[581px] md:ml-[750px] text-[15px] text-center w-[max-content]"
+                    onClick={pagLog}
+                    shape="RoundedBorder19"
+                    size="sm"
+                    variant="FillBlack902"
+                  >
+                    Login
+                  </Button>
+                </>)
+              }
             </ul>
           </Row>
         </Row>

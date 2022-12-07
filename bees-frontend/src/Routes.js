@@ -2,7 +2,6 @@ import React from "react";
 import Register from "pages/Register";
 import Login from "pages/Login";
 import EditCreateBeehive from "pages/EditCreateBeehive";
-import Components from "pages/Components";
 import Dashboard from "pages/Dashboard";
 import Loja from "pages/Loja";
 import MainTwo from "pages/MainTwo";
@@ -20,7 +19,6 @@ const ProjectRoutes = () => {
         <Route path="/maintwo" element={<MainTwo />} />
         <Route path="/loja" element={<Loja />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/components" element={<Components />} />
         <Route path="/editcreatebeehive" element={<EditCreateBeehive />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

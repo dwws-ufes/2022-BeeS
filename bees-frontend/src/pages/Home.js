@@ -24,9 +24,6 @@ const Home = () => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link to="/components">Components</Link>
-        </li>
-        <li>
           <Link to="/editcreatebeehive">EditCreateBeehive</Link>
         </li>
         <li>

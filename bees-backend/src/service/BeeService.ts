@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Inject, Service } from "typedi";
+import AppError from "../customError/customAppError";
 import { BeeRepository } from "../persistence/repositoies/BeeRepository";
 const jwt = require('jsonwebtoken');
 
@@ -20,8 +21,10 @@ export class BeeService{
                     message: "User created"
                 })
             }catch(e){
-                console.error(e)
-                res.status(500).send(`Error: ${(e as Error).message}`)
+                if((e as Error).message.includes("duplicate")){
+                    e = new AppError("Email already exists", 400)
+                }
+                if(e instanceof AppError){ return res.status(e.code).send({status: "ERROR", message: e.message}) }else{ return res.status(500).send({status: "error", message: (e as Error).message}) }
             }
         }
     }

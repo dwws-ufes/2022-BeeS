@@ -23,16 +23,16 @@
     "colId": "5d817ec7-353e-4418-9105-01d92db22d6c",
     "containerId": "e9f944c0-ce30-4ff0-97e5-b5e4601d3f05",
     "name": "Register",
-    "url": "http://localhost:4000/bee/register",
+    "url": "http://localhost:4000//bee/register",
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-12-03T12:16:23.687Z",
-    "modified": "2022-12-05T04:49:21.405Z",
+    "modified": "2022-12-07T06:21:59.084Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Jon Doe 2\",\n  \"email\": \"jon.doe2@gmail.com\",\n  \"password\": \"secure-pass\"\n}",
+      "raw": "{\n  \"name\": \"Jon Doe 2\",\n  \"email\": \"jon.doe6@gmail.com\",\n  \"password\": \"secure-pass\"\n}",
       "form": []
     },
     "tests": []

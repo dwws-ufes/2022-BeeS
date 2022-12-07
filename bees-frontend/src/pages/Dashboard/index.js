@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Column, Row, Text, Button, Img, Stack } from "components";
 import Header from "components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import { getBeehivesOfUser } from "api";
+import { BeehiveItem } from "components/BeehiveItem";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+
+  const [beehives, setBeehives] = useState([])
+  const [page, setPage] = useState(0)
+  const [name, setName] = useState(undefined)
+
+  useEffect(() => {
+    getBeehivesOfUser(page, 10, name).then((res)  => {
+      setBeehives(res.data.beehives)
+    })
+  }, [page])
 
   function handleNavigate3() {
     navigate("/editcreatebeehive");
@@ -81,264 +93,9 @@ const DashboardPage = () => {
               </Button>
             </Row>
             <Column className="flex flex-col items-center justify-start w-[100%]">
-              <Column
-                className="common-pointer flex flex-col items-center justify-end sm:p-[2px] md:p-[3px] p-[5px] w-[100%]"
-                onClick={handleNavigate10}
-              >
-                <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-start md:mt-[11px] mt-[17px] sm:mt-[9px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[94%]">
-                  <Stack className="h-[125px] relative w-[125px] sm:w-[66px] md:w-[86px]">
-                    <Stack className="absolute h-[125px] left-[0] sm:w-[100%] w-[75%]">
-                      <Img
-                        src="images/img_arrowleft.svg"
-                        className="absolute h-[71px] left-[0] max-w-[100%] top-[0] sm:w-[100%] w-[66%]"
-                        alt="arrowleft"
-                      />
-                      <Img
-                        src="images/img_arrowleft.svg"
-                        className="absolute bottom-[0] h-[71px] max-w-[100%] right-[0] sm:w-[100%] w-[66%]"
-                        alt="arrowleft One"
-                      />
-                    </Stack>
-                    <Img
-                      src="images/img_arrowleft.svg"
-                      className="absolute h-[71px] max-w-[100%] right-[0] top-[0] sm:w-[100%] w-[49%]"
-                      alt="arrowleft Two"
-                    />
-                  </Stack>
-                  <Column className="flex flex-col justify-start md:ml-[24px] ml-[35px] sm:mt-[11px] md:mt-[14px] mt-[21px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[14%]">
-                    <Text
-                      className="text-white_A700 w-[auto]"
-                      as="h5"
-                      variant="h5"
-                    >
-                      Nome Loja
-                    </Text>
-                    <Text
-                      className="font-normal sm:mt-[12px] md:mt-[16px] mt-[24px] not-italic text-gray_500 w-[auto]"
-                      variant="body1"
-                    >
-                      Criado em 00/00/0000
-                    </Text>
-                  </Column>
-                  <Button
-                    className="common-pointer flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[379px] md:ml-[490px] ml-[713px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                    onClick={handleNavigate11}
-                    size="lgIcn"
-                    variant="icbFillYellow600"
-                  >
-                    <Img
-                      src="images/img_edit.svg"
-                      className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                      alt="edit"
-                    />
-                  </Button>
-                  <Button
-                    className="flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[12px] md:ml-[15px] ml-[23px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                    size="lgIcn"
-                    variant="icbFillRed500"
-                  >
-                    <Img
-                      src="images/img_trash.svg"
-                      className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                      alt="trash"
-                    />
-                  </Button>
-                </Row>
-              </Column>
-              <Stack className="h-[299px] relative w-[100%]">
-                <Column
-                  className="common-pointer absolute flex flex-col items-center justify-end sm:p-[2px] md:p-[3px] p-[5px] top-[0] w-[100%]"
-                  onClick={handleNavigate12}
-                >
-                  <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-start md:mt-[11px] mt-[17px] sm:mt-[9px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[94%]">
-                    <Stack className="h-[125px] relative w-[125px] sm:w-[66px] md:w-[86px]">
-                      <Stack className="absolute h-[125px] left-[0] sm:w-[100%] w-[75%]">
-                        <Img
-                          src="images/img_arrowleft.svg"
-                          className="absolute h-[71px] left-[0] max-w-[100%] top-[0] sm:w-[100%] w-[66%]"
-                          alt="arrowleft Three"
-                        />
-                        <Img
-                          src="images/img_arrowleft.svg"
-                          className="absolute bottom-[0] h-[71px] max-w-[100%] right-[0] sm:w-[100%] w-[66%]"
-                          alt="arrowleft Four"
-                        />
-                      </Stack>
-                      <Img
-                        src="images/img_arrowleft.svg"
-                        className="absolute h-[71px] max-w-[100%] right-[0] top-[0] sm:w-[100%] w-[49%]"
-                        alt="arrowleft Five"
-                      />
-                    </Stack>
-                    <Column className="flex flex-col justify-start md:ml-[24px] ml-[35px] sm:mt-[11px] md:mt-[14px] mt-[21px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[14%]">
-                      <Text
-                        className="text-white_A700 w-[auto]"
-                        as="h5"
-                        variant="h5"
-                      >
-                        Nome Loja
-                      </Text>
-                      <Text
-                        className="font-normal sm:mt-[12px] md:mt-[16px] mt-[24px] not-italic text-gray_500 w-[auto]"
-                        variant="body1"
-                      >
-                        Criado em 00/00/0000
-                      </Text>
-                    </Column>
-                    <Button
-                      className="common-pointer flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[379px] md:ml-[490px] ml-[713px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                      onClick={handleNavigate3}
-                      size="lgIcn"
-                      variant="icbFillYellow600"
-                    >
-                      <Img
-                        src="images/img_edit.svg"
-                        className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                        alt="edit One"
-                      />
-                    </Button>
-                    <Button
-                      className="flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[12px] md:ml-[15px] ml-[23px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                      size="lgIcn"
-                      variant="icbFillRed500"
-                    >
-                      <Img
-                        src="images/img_trash.svg"
-                        className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                        alt="trash One"
-                      />
-                    </Button>
-                  </Row>
-                </Column>
-                <Column
-                  className="common-pointer absolute bottom-[0] flex flex-col items-center justify-end sm:p-[2px] md:p-[3px] p-[5px] w-[100%]"
-                  onClick={handleNavigate4}
-                >
-                  <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-start md:mt-[11px] mt-[17px] sm:mt-[9px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[94%]">
-                    <Stack className="h-[125px] relative w-[125px] sm:w-[66px] md:w-[86px]">
-                      <Stack className="absolute h-[125px] left-[0] sm:w-[100%] w-[75%]">
-                        <Img
-                          src="images/img_arrowleft.svg"
-                          className="absolute h-[71px] left-[0] max-w-[100%] top-[0] sm:w-[100%] w-[66%]"
-                          alt="arrowleft Six"
-                        />
-                        <Img
-                          src="images/img_arrowleft.svg"
-                          className="absolute bottom-[0] h-[71px] max-w-[100%] right-[0] sm:w-[100%] w-[66%]"
-                          alt="arrowleft Seven"
-                        />
-                      </Stack>
-                      <Img
-                        src="images/img_arrowleft.svg"
-                        className="absolute h-[71px] max-w-[100%] right-[0] top-[0] sm:w-[100%] w-[49%]"
-                        alt="arrowleft Eight"
-                      />
-                    </Stack>
-                    <Column className="flex flex-col justify-start md:ml-[24px] ml-[35px] sm:mt-[11px] md:mt-[14px] mt-[21px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[14%]">
-                      <Text
-                        className="text-white_A700 w-[auto]"
-                        as="h5"
-                        variant="h5"
-                      >
-                        Nome Loja
-                      </Text>
-                      <Text
-                        className="font-normal sm:mt-[12px] md:mt-[16px] mt-[24px] not-italic text-gray_500 w-[auto]"
-                        variant="body1"
-                      >
-                        Criado em 00/00/0000
-                      </Text>
-                    </Column>
-                    <Button
-                      className="common-pointer flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[379px] md:ml-[490px] ml-[713px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                      onClick={handleNavigate5}
-                      size="lgIcn"
-                      variant="icbFillYellow600"
-                    >
-                      <Img
-                        src="images/img_edit.svg"
-                        className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                        alt="edit Two"
-                      />
-                    </Button>
-                    <Button
-                      className="flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[12px] md:ml-[15px] ml-[23px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                      size="lgIcn"
-                      variant="icbFillRed500"
-                    >
-                      <Img
-                        src="images/img_trash.svg"
-                        className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                        alt="trash Two"
-                      />
-                    </Button>
-                  </Row>
-                </Column>
-              </Stack>
-              <Column
-                className="common-pointer flex flex-col items-center justify-end sm:mt-[4px] md:mt-[5px] mt-[8px] sm:p-[2px] md:p-[3px] p-[5px] w-[100%]"
-                onClick={handleNavigate6}
-              >
-                <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-start md:mt-[11px] mt-[17px] sm:mt-[9px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[94%]">
-                  <Stack className="h-[125px] relative w-[125px] sm:w-[66px] md:w-[86px]">
-                    <Stack className="absolute h-[125px] left-[0] sm:w-[100%] w-[75%]">
-                      <Img
-                        src="images/img_arrowleft.svg"
-                        className="absolute h-[71px] left-[0] max-w-[100%] top-[0] sm:w-[100%] w-[66%]"
-                        alt="arrowleft Nine"
-                      />
-                      <Img
-                        src="images/img_arrowleft.svg"
-                        className="absolute bottom-[0] h-[71px] max-w-[100%] right-[0] sm:w-[100%] w-[66%]"
-                        alt="arrowleft Ten"
-                      />
-                    </Stack>
-                    <Img
-                      src="images/img_arrowleft.svg"
-                      className="absolute h-[71px] max-w-[100%] right-[0] top-[0] sm:w-[100%] w-[49%]"
-                      alt="arrowleft Eleven"
-                    />
-                  </Stack>
-                  <Column className="flex flex-col justify-start md:ml-[24px] ml-[35px] sm:mt-[11px] md:mt-[14px] mt-[21px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[14%]">
-                    <Text
-                      className="text-white_A700 w-[auto]"
-                      as="h5"
-                      variant="h5"
-                    >
-                      Nome Loja
-                    </Text>
-                    <Text
-                      className="font-normal sm:mt-[12px] md:mt-[16px] mt-[24px] not-italic text-gray_500 w-[auto]"
-                      variant="body1"
-                    >
-                      Criado em 00/00/0000
-                    </Text>
-                  </Column>
-                  <Button
-                    className="common-pointer flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[379px] md:ml-[490px] ml-[713px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                    onClick={handleNavigate7}
-                    size="lgIcn"
-                    variant="icbFillYellow600"
-                  >
-                    <Img
-                      src="images/img_edit.svg"
-                      className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                      alt="edit Three"
-                    />
-                  </Button>
-                  <Button
-                    className="flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[12px] md:ml-[15px] ml-[23px] sm:my-[11px] md:my-[15px] my-[22px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
-                    size="lgIcn"
-                    variant="icbFillRed500"
-                  >
-                    <Img
-                      src="images/img_trash.svg"
-                      className="h-[43px] sm:h-[23px] md:h-[30px] flex items-center justify-center"
-                      alt="trash Three"
-                    />
-                  </Button>
-                </Row>
-              </Column>
+              {
+                beehives.map((beehive) => <BeehiveItem name={beehive.name} id={beehive.id}/>)
+              }
             </Column>
           </Column>
         </Column>

@@ -9,7 +9,7 @@ import { Log } from "./models/Log"
 dotenv.config()
 const AppDataSource = new DataSource({
     type: "postgres",
-    host: process.env["POSTGRES_HOST"],
+    host: process.env["NODE_ENV"] === "prod" ? process.env["POSTGRES_HOST"] : "localhost",
     port: 5432,
     username: process.env["POSTGRES_USER"],
     password: process.env["POSTGRES_PASSWORD"],
