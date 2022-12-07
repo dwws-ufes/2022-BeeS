@@ -35,7 +35,7 @@ export class BeehiveService{
                     })
                 }
                 const { name, admins } = req.body
-                this.beehiveRepo.createBeehive(name, user.email, admins)
+                await this.beehiveRepo.createBeehive(name, user.email, admins)
                 return res.send({
                     status: "OK",
                     message: "Beehive created"
@@ -179,7 +179,38 @@ export class BeehiveService{
 
     delete(){
         return async (req: JWTRequest, res: Response, next: NextFunction) => {
-
+            try{
+                const auth = req.auth
+                if(auth === undefined || auth === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "No token found"
+                    })
+                }
+                const user = await this.beeRepo.getBeeByEmail(auth.email)
+                if(user === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "Token invalid"
+                    })
+                }
+                const { id } = req.params
+                const beehive = await this.beehiveRepo.getBeehiveById(Number(id), user.email)
+                if(beehive === null){
+                    return res.status(401).json({
+                        status: "ERROR",
+                        message: "Unauthorized to get honeycombs from this beehive"
+                    })
+                }
+                await this.beehiveRepo.deleteBeehive(Number(id))
+                return res.status(200).send({
+                    status: "OK",
+                    message: "Beehive deleted"
+                })
+            }catch(e){
+                console.error(e)
+                if(e instanceof AppError){ return res.status(e.code).send({status: "ERROR", message: e.message}) }else{ return res.status(500).send({status: "error", message: (e as Error).message}) }
+            }
         }
     }
 }

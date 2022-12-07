@@ -15,3 +15,5 @@ honeycombRoutes.post("/", honeycombService.create())
 honeycombRoutes.get("/:id/:beehiveId", honeycombService.get())
 
 honeycombRoutes.put("/:id/:beehiveId", honeycombService.update())
+
+honeycombRoutes.delete("/:id/:beehiveId", honeycombService.delete())

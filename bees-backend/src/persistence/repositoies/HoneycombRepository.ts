@@ -53,4 +53,14 @@ export class HoneycombRepository {
     async deleteHoneycomb(beehiveId: number, sku: string){
         return await this.repo.delete({ beehive: { id: beehiveId }, sku })
     }
+
+    async updateHoneycomb(beehiveId: number, sku: string, newSku?: string, name?: string, description?: string, quantity?: number, expiry?: Date){
+        return await this.repo.update({ beehive: { id: beehiveId }, sku }, {
+            sku: newSku,
+            name,
+            description,
+            expiry,
+            quantity
+        })
+    }
 }

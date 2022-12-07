@@ -37,7 +37,8 @@ export class BeehiveRepository {
         if(owner === null){
             throw new AppError("This user does not exist", 404)
         }
-        if(admins.length === 0 && adminsEmail !== undefined){
+        console.log(admins, adminsEmail)
+        if(admins.length === 0 && adminsEmail !== undefined && adminsEmail.length !== 0){
             throw new AppError("Some admins do not have a account", 404)
         }
         const beehiveInsert = await this.repo.insert({

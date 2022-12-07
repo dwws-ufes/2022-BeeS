@@ -99,14 +99,63 @@ export class HoneycombService{
 
     update(){
         return async (req: JWTRequest, res: Response, next: NextFunction) => {
-
+            try{
+                const auth = req.auth
+                if(auth === undefined || auth === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "No token found"
+                    })
+                }
+                const user = await this.beeRepo.getBeeByEmail(auth.email)
+                if(user === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "Token invalid"
+                    })
+                }
+                const { id, beehiveId } = req.params
+                const {sku, name, description, quantity, expiry} = req.body
+                await this.honeycombRepo.updateHoneycomb(Number(beehiveId), id, sku, name, description, quantity, expiry)
+                return res.status(200).send({
+                    status: "OK",
+                    message: "Honeycomb Updated"
+                })
+            }catch(e){
+                console.error(e)
+                if(e instanceof AppError){ return res.status(e.code).send({status: "ERROR", message: e.message}) }else{ return res.status(500).send({status: "error", message: (e as Error).message}) }
+            }
         }
 
     }
 
     delete(){
         return async (req: JWTRequest, res: Response, next: NextFunction) => {
-
+            try{
+                const auth = req.auth
+                if(auth === undefined || auth === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "No token found"
+                    })
+                }
+                const user = await this.beeRepo.getBeeByEmail(auth.email)
+                if(user === null){
+                    return res.status(401).send({
+                        status: "ERROR",
+                        message: "Token invalid"
+                    })
+                }
+                const { id, beehiveId } = req.params
+                await this.honeycombRepo.deleteHoneycomb(Number(beehiveId), id)
+                return res.status(200).send({
+                    status: "OK",
+                    message: `${id} deleted`
+                })
+            }catch(e){
+                console.error(e)
+                if(e instanceof AppError){ return res.status(e.code).send({status: "ERROR", message: e.message}) }else{ return res.status(500).send({status: "error", message: (e as Error).message}) }
+            }
         }
 
     }
