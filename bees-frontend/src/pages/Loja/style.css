@@ -1,0 +1,12 @@
+.honeyhover:hover {
+    background-color: #080705;
+}
+
+.honeyhover .hidden {
+    display: none;
+}
+
+
+.honeyhover:hover .hidden {
+    display: block;
+}

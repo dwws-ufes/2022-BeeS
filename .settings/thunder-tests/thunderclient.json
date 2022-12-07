@@ -65,16 +65,16 @@
     "colId": "5d817ec7-353e-4418-9105-01d92db22d6c",
     "containerId": "678204f0-2649-4258-b982-dcf0b35428ab",
     "name": "Get Of User",
-    "url": "http://localhost:4000/beehive?pageSize=13&pageNo=0",
+    "url": "http://localhost:4000/beehive?pageSize=10&pageNo=0",
     "method": "GET",
     "sortNum": 40000,
     "created": "2022-12-03T12:53:34.987Z",
-    "modified": "2022-12-05T05:09:24.378Z",
+    "modified": "2022-12-07T09:44:13.562Z",
     "headers": [],
     "params": [
       {
         "name": "pageSize",
-        "value": "13",
+        "value": "10",
         "isPath": false
       },
       {
@@ -100,11 +100,11 @@
     "colId": "5d817ec7-353e-4418-9105-01d92db22d6c",
     "containerId": "678204f0-2649-4258-b982-dcf0b35428ab",
     "name": "Get By Id",
-    "url": "http://localhost:4000/beehive/2",
+    "url": "http://localhost:4000/beehive/1",
     "method": "GET",
     "sortNum": 60000,
     "created": "2022-12-03T13:02:54.703Z",
-    "modified": "2022-12-05T03:58:09.919Z",
+    "modified": "2022-12-07T09:12:34.988Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -122,12 +122,12 @@
     "method": "POST",
     "sortNum": 70000,
     "created": "2022-12-05T04:04:52.414Z",
-    "modified": "2022-12-05T05:12:03.698Z",
+    "modified": "2022-12-07T10:12:37.576Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"sku\": \"RM-666\",\n  \"name\": \"Remédio 1\",\n  \"description\": \"TESTE\",\n  \"expiry\": \"2022-12-10\",\n  \"beehive\": 2,\n  \"quantity\": 4\n}",
+      "raw": "{\n  \"sku\": \"MACX\",\n  \"name\": \"Boneco max steel\",\n  \"description\": \"TESTE\",\n  \"expiry\": \"2022-12-10\",\n  \"beehive\": 2,\n  \"quantity\": 4\n}",
       "form": []
     },
     "auth": {

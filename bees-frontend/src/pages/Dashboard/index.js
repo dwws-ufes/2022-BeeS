@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Column, Row, Text, Button, Img, Stack } from "components";
+import { Column, Row, Text, Button, Img, Line, Input } from "components";
 import Header from "components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { getBeehivesOfUser } from "api";
@@ -14,8 +14,12 @@ const DashboardPage = () => {
   const [name, setName] = useState(undefined)
 
   useEffect(() => {
-    getBeehivesOfUser(page, 10, name).then((res)  => {
-      setBeehives(res.data.beehives)
+    getBeehivesOfUser((page * 3) - page, 3, name).then((res)  => {
+      if(res.data.beehives.length !== 0){
+        setBeehives(res.data.beehives)
+      }else{
+        setPage((prev) => prev - 1)
+      }
     })
   }, [page])
 
@@ -65,11 +69,22 @@ const DashboardPage = () => {
                 >
                   Nome
                 </Text>
-                <Column className="bg-gray_200 border border-black_900 border-solid flex flex-col items-end justify-start ml-[4px] mt-[4px] sm:mx-[0] pl-[1px] py-[1px] rounded-radius14 sm:w-[100%] w-[97%]">
+                <Input placeholder="Nome da colméia" wrapClassName="flex" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray_200 border border-black_900 border-solid flex flex-col items-end justify-start ml-[4px] mt-[4px] sm:mx-[0] pl-[1px] py-[1px] rounded-radius14 sm:w-[100%] w-[97%]">
                   <Button
                     className="flex sm:h-[16px] md:h-[20px] h-[29px] items-center justify-center rounded-radius50 sm:w-[15px] md:w-[19px] w-[29px]"
+                    style={{index: 999}}
                     size="smIcn"
                     variant="icbFillYellow600"
+                    onClick={() => {
+                      getBeehivesOfUser(0, 3, name).then((res)  => {
+                        if(res.data.beehives.length !== 0){
+                          setBeehives(res.data.beehives)
+                        }else{
+                          setPage((prev) => prev - 1)
+                        }
+                      })
+                      setPage(0)
+                    }}
                   >
                     <Img
                       src="images/img_search.svg"
@@ -77,7 +92,7 @@ const DashboardPage = () => {
                       alt="search"
                     />
                   </Button>
-                </Column>
+                </Input>
               </Column>
               <Button
                 className="common-pointer flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center sm:ml-[212px] md:ml-[274px] ml-[399px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
@@ -97,6 +112,33 @@ const DashboardPage = () => {
                 beehives.map((beehive) => <BeehiveItem name={beehive.name} id={beehive.id}/>)
               }
             </Column>
+            <Row className="bg-gray_900 flex flex-row md:flex-wrap sm:flex-wrap items-center justify-end sm:mt-[29px] md:mt-[37px] mt-[55px] sm:mx-[0] px-[12px] sm:px-[6px] md:px-[8px] sm:w-[100%] w-[15%]">
+                <div className="max-w-[100%] ml-[14px] sm:ml-[7px] md:ml-[9px] w-[7%]" onClick={() => setPage((prev) => {
+                    if(prev <= 0){
+                      return 0
+                    }
+                    return prev - 1
+                  })}>
+                </div>
+                <Line className="bg-black_900 sm:h-[100px] md:h-[100px] h-[100px] rotate-[180deg] w-[1px]" />
+                <Text
+                  className="font-bold sm:ml-[4px] md:ml-[6px] ml-[9px] text-yellow_600 md:tracking-ls10 tracking-ls14549999999999999 sm:tracking-ls7 w-[auto]"
+                  variant="body1"
+                >
+                  
+                  {page} {page + 1} { page + 2 }
+                </Text>
+                <Line className="bg-black_900 sm:h-[18px] md:h-[23px] h-[33px] ml-[10px] sm:ml-[5px] md:ml-[6px] rotate-[180deg] w-[1px]" />
+                <div onClick={() => setPage((prev) => {
+                  return prev + 1
+                })}>
+                <Img
+                  src="images/arrow_forward_ios.svg"
+                  className="max-w-[100%] ml-[14px] sm:ml-[7px] md:ml-[9px] w-[7%]"
+                  alt="arrowright"
+                />
+                </div>
+              </Row>
           </Column>
         </Column>
       </Column>

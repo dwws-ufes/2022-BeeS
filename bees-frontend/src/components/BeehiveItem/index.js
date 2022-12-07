@@ -14,14 +14,14 @@ const BeehiveItem = ({
     <>
         <Column
             className="common-pointer flex flex-col items-center justify-end sm:p-[2px] md:p-[3px] p-[5px] w-[100%]"
-            onClick={() => navigate("/loja", {
+            
+        >
+            <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-start md:mt-[11px] mt-[17px] sm:mt-[9px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[94%]">
+                <Stack onClick={() => navigate("/loja", {
                 state: {
                     id
                 }
-            })}
-        >
-            <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-start md:mt-[11px] mt-[17px] sm:mt-[9px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[94%]">
-                <Stack className="h-[125px] relative w-[125px] sm:w-[66px] md:w-[86px]">
+            })} className="h-[125px] relative w-[125px] sm:w-[66px] md:w-[86px]">
                     <Stack className="absolute h-[125px] left-[0] sm:w-[100%] w-[75%]">
                         <Img
                             src="images/img_arrowleft.svg"

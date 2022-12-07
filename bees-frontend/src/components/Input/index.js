@@ -46,7 +46,8 @@ const Input = React.forwardRef(
             name={name}
             placeholder={placeholder}
             {...restProps}
-          />
+            />
+          {!!children && children}
           {!!suffix && suffix}
         </div>
         {!!errors && <ErrorMessage errors={errors} />}

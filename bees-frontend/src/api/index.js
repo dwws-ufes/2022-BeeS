@@ -51,6 +51,10 @@ export const loggout = () => {
     cookies.remove(userData)
 }
 
+export const getUserData = () => {
+    return cookies.get(userData)
+}
+
 export const createBeehive = async (name, adminEmails) => {
     return await axiosInstance.post("/beehive", {
         name,
@@ -129,6 +133,8 @@ export const updateHoneycomb = async (sku, beehiveId, newSku, name, description,
         description,
         quantity,
         expiry
+    }, {
+        headers: getHeaders()
     })
 }
 
