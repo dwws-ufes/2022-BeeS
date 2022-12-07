@@ -31,6 +31,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
       POSTGRES_HOST: ${POSTGRES_HOST:-localhost}
+      NODE_ENV: "prod"
     ports:
       - ${PORT}:${PORT}
 

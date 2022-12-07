@@ -17,4 +17,5 @@ ADD . ${APPHOME}
 
 RUN yarn build
 
-CMD ["node", "build/src/index.js", "--unhandled-rejections=strict"]
+CMD ["/bin/sh", "-c", "yarn typeorm migration:run -d ${APPHOME}build/ormconfig.js && node build/src/index.js --unhandled-rejections=strict"]
+
