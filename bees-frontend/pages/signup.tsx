@@ -12,6 +12,9 @@ export default function Login() {
 
       <main className={styles.main}>
         <div className={styles.card}>
+          <h2>Nome</h2>
+          <input type="text" className={styles.data}></input>
+
           <h2>Email</h2>
           <input type="text" className={styles.data}></input>
 
@@ -19,11 +22,7 @@ export default function Login() {
           <input type="text" className={styles.data}></input>
 
           <div className={styles.button_logar}>
-            <a href="your_home">Login</a>
-          </div>
-
-          <div className={styles.button_criar}>
-            <a href="signup">Criar conta</a>
+            <a href="your_home">Criar conta</a>
           </div>
         </div>
       </main>
