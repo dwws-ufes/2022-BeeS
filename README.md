@@ -22,3 +22,7 @@ Assignment for the 2022 edition of the "Web Development and the Semantic Web" co
 2. Para subir o banco de dados deve-se rodar o comando no diretório de backend:
 
     ```docker-compose up -d```
+
+3. Rodar também no diretório de frontend:
+
+    ```docker-compose up -d```
