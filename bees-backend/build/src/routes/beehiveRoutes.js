@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.beehiveRoutes = void 0;
+const express_1 = require("express");
+const typedi_1 = __importDefault(require("typedi"));
+const ensureAuth_1 = __importDefault(require("../customMiddleware/ensureAuth"));
+const jwtSign_1 = __importDefault(require("../customMiddleware/jwtSign"));
+const BeehiveService_1 = require("../service/BeehiveService");
+exports.beehiveRoutes = (0, express_1.Router)();
+const beehiveService = typedi_1.default.get(BeehiveService_1.BeehiveService);
+exports.beehiveRoutes.all("*", jwtSign_1.default, ensureAuth_1.default);
+exports.beehiveRoutes.post("/", beehiveService.create());
+exports.beehiveRoutes.get("/", beehiveService.getBeehives());
+exports.beehiveRoutes.get("/:id", beehiveService.getBeehive());
+exports.beehiveRoutes.get("/:id/honeycombs", beehiveService.getHoneycombsOfBeehive());
+exports.beehiveRoutes.put("/:id", beehiveService.update());
+exports.beehiveRoutes.delete("/:id", beehiveService.delete());
