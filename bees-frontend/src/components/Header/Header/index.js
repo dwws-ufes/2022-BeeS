@@ -3,6 +3,7 @@ import React from "react";
 import { Row, Button } from "components";
 import { useNavigate } from "react-router-dom";
 import { isLoggedIn, loggout } from "api";
+import Logo from "assets/images/BeeS.png"
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -26,9 +27,9 @@ const Header = (props) => {
           <Row className="flex flex-row md:flex-wrap sm:flex-wrap md:ml-[15px] ml-[22px] mt-[1px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[98%] common-row-list common-row-list common-row-list common-row-list">
             <ul className="flex flex-row">
               <li className="w-[4%] sm:w-[100%] sm:my-[10px]">
-                <div className="bg-white_A700 sm:h-[20px] md:h-[26px] h-[37px]"></div>
+                <div className="bg-yellow_600 sm:h-[20px] md:h-[26px] h-[37px]"><img src={Logo}></img></div>
               </li>
-              <li className="w-[auto] sm:w-[100%] sm:my-[10px]">
+              <li className="w-[auto] sm:w-[100%] sm:my-[10px]"> 
                 <a
                   href={"javascript:"}
                   className="cursor-pointer font-bold font-inter sm:text-[28px] md:text-[30px] text-[32px] text-black_901"
