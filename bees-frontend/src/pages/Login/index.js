@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Column, Text, Input, Button } from "components";
 import { useNavigate } from "react-router-dom";
 import { login } from "api";
+import Header from "components/Header/Header";
+import Footer from "components/Footer/Footer";
 
 const LoginPage = () => {
 
@@ -22,7 +24,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <Column className="bg-yellow_600 flex flex-col font-inter items-center justify-start mx-[auto] sm:p-[15px] md:p-[178px] p-[260px] w-[100%]">
+    <Header/>
+      <Column className="bg-yellow_500 flex flex-col font-inter items-center justify-start mx-[auto] sm:p-[15px] md:p-[178px] p-[58px] w-[100%]">
         <Column className="bg-black_900 flex flex-col items-center justify-start max-w-[558px] mx-[auto] sm:p-[3px] md:p-[4px] p-[6px] sm:px-[15px] rounded-radius33 w-[100%]">
           <Column className="flex flex-col justify-start sm:mt-[37px] md:mt-[48px] mt-[71px] sm:mx-[0] pt-[1px] sm:px-[0] px-[1px] sm:w-[100%] w-[94%]">
             <Text
@@ -84,6 +87,7 @@ const LoginPage = () => {
           </Button>
         </Column>
       </Column>
+      <Footer className="bg-yellow_600 w-[100%]" />
     </>
   );
 };

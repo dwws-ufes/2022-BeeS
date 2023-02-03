@@ -23,6 +23,7 @@ module.exports = {
         deep_purple_A200: "#9747ff",
         gray_200: "#eeeeee",
         white_A700: "#ffffff",
+        yellow_500: "#ffeba3",
       },
       borderRadius: {
         radius5: "5px",

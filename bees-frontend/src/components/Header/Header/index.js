@@ -23,17 +23,17 @@ const Header = (props) => {
   return (
     <>
       <header className={props.className}>
-        <Row className="bg-yellow_600 flex flex-row md:flex-wrap sm:flex-wrap items-center sm:p-[15px] md:p-[16px] p-[24px] rounded-bl-[10px] rounded-br-[10px] rounded-tl-[0] rounded-tr-[0] w-[100%]">
+        <Row className="bg-yellow_600 flex flex-row md:flex-wrap sm:flex-wrap items-center sm:p-[15px] md:p-[16px] p-[24px] rounded-br-[10px] rounded-tl-[0] rounded-tr-[0] w-[100%]">
           <Row className="flex flex-row md:flex-wrap sm:flex-wrap md:ml-[15px] ml-[22px] mt-[1px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[98%] common-row-list common-row-list common-row-list common-row-list">
             <ul className="flex flex-row">
               <li className="w-[4%] sm:w-[100%] sm:my-[10px]">
-                <div className="bg-yellow_600 sm:h-[20px] md:h-[26px] h-[37px]"><img src={Logo}></img></div>
+                <div className="bg-yellow_600 sm:h-[20px] md:h-[26px] h-[37px]"></div>
               </li>
+              <li className="w-[50px]"><img src={Logo}></img></li>
               <li className="w-[auto] sm:w-[100%] sm:my-[10px]"> 
-                <a
-                  href={"javascript:"}
+                <a 
+                  onClick={() => navigate("/")}
                   className="cursor-pointer font-bold font-inter sm:text-[28px] md:text-[30px] text-[32px] text-black_901"
-                  rel="noreferrer"
                 >
                   BeeS
                 </a>

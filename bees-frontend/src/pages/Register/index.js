@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Column, Text, Input, Button } from "components";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api";
+import Header from "components/Header/Header";
+import Footer from "components/Footer/Footer";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -19,7 +21,8 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Column className="bg-yellow_600 flex flex-col font-inter items-center justify-start mx-[auto] sm:p-[15px] md:p-[170px] p-[248px] w-[100%]">
+    <Header/>
+      <Column className="bg-yellow_500 flex flex-col font-inter items-center justify-start mx-[auto] sm:p-[15px] md:p-[170px] p-[45px] w-[100%]">
         <Column className="bg-black_900 flex flex-col items-center justify-start max-w-[558px] mb-[1px] mx-[auto] sm:p-[3px] md:p-[4px] p-[6px] sm:px-[15px] rounded-radius33 w-[100%]">
           <Column className="flex flex-col justify-start sm:mt-[17px] md:mt-[22px] mt-[33px] sm:mx-[0] pt-[1px] sm:px-[0] px-[1px] sm:w-[100%] w-[94%]">
             <Text
@@ -90,6 +93,7 @@ const RegisterPage = () => {
           </Button>
         </Column>
       </Column>
+      <Footer className="bg-yellow_600 w-[100%]" />
     </>
   );
 };
