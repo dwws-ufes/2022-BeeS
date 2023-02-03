@@ -112,7 +112,7 @@ const DashboardPage = () => {
                 beehives.map((beehive) => <BeehiveItem name={beehive.name} id={beehive.id}/>)
               }
             </Column>
-            <Row className="bg-gray_900 flex flex-row md:flex-wrap sm:flex-wrap items-center justify-end sm:mt-[29px] md:mt-[37px] mt-[55px] sm:mx-[0] px-[12px] sm:px-[6px] md:px-[8px] sm:w-[100%] w-[15%]">
+            <Row className="bg-gray_900 flex flex-row md:flex-wrap sm:flex-wrap items-center justify-end sm:mt-[29px] md:mt-[37px] mt-[55px] sm:mx-[0] px-[12px] sm:px-[6px] md:px-[8px] sm:w-[100%] w-[300px]">
                 <div className="max-w-[100%] ml-[14px] sm:ml-[7px] md:ml-[9px] w-[7%]" onClick={() => setPage((prev) => {
                     if(prev <= 0){
                       return 0
