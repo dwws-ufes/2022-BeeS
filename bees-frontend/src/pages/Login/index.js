@@ -15,7 +15,7 @@ const LoginPage = () => {
 
   function logar() {
     login(email, password)
-      .then(() => navigate("/"))
+      .then(() => navigate("/dashboard"))
       .catch((e) => console.log("Login failed: ", e.message))
   }
   function criarConta() {

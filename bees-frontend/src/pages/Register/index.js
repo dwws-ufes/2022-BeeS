@@ -14,10 +14,9 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("")
 
   function criarConta() {
-    /*register(name, email, password)
-      .then(() => navigate("/"))
-      .catch((e) => console.log("Error: ", e.message))*/
-      navigate("/dashboard")
+    register(name, email, password)
+      .then(() => navigate("/dashboad"))
+      .catch((e) => console.log("Error: ", e.message))
   }
 
   return (

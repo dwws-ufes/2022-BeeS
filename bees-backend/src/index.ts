@@ -13,7 +13,7 @@ const app = Express.default()
 console.log(process.env["FRONTEND_CORS_URL"])
 
 app.use(Express.json())
-app.use(cors({ origin: process.env["FRONTEND_CORS_URL"] || "http://localhost:4000", credentials: true }))
+app.use(cors({ origin: process.env["FRONTEND_CORS_URL"] || "https://localhost:4000", credentials: true }))
 
 app.use("/bee", beeRoutes)
 app.use("/beehive", beehiveRoutes)

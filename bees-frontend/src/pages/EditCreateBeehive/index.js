@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Column, Row, Text, Img, Button, Input } from "components";
 import Header from "components/Header/Header";
+import Footer from "components/Footer/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createBeehive, getBeehive, getUserData, updateBeehive } from "api";
 
@@ -50,8 +51,8 @@ const EditCreateBeehivePage = ({  }) => {
                       placeholder="example@email.com"
                   /> : <Text
                       className="flex-grow text-white_A700"
-                      as="h1"
-                      variant="h1"
+                      as="h2"
+                      variant="h2"
                     >
                   {name}
                   </Text>
@@ -87,13 +88,14 @@ const EditCreateBeehivePage = ({  }) => {
                   />
                 </Button>
               </Row>
+
               <Text
                 className="md:mt-[10px] mt-[15px] sm:mt-[7px] text-gray_501 w-[auto]"
                 as="h6"
                 variant="h6"
               >
-                {getUserData().email} (Você)
               </Text>
+
               {
                 admins.map((admin, index) => (
                   <Row className="flex flex-row md:flex-wrap sm:flex-wrap items-center mt-[12px] sm:mt-[6px] md:mt-[8px] sm:mx-[0] sm:px-[0] sm:w-[100%] w-[59%]">
@@ -135,7 +137,7 @@ const EditCreateBeehivePage = ({  }) => {
               }
             </Column>
             <Button
-              className="common-pointer flex sm:h-[43px] md:h-[56px] h-[80px] items-center justify-center ml-[1180px] sm:ml-[628px] md:ml-[812px] sm:mt-[202px] md:mt-[262px] mt-[381px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
+              className="common-pointer flex items-center justify-center ml-[1180px] mt-[150px] rounded-radius50 sm:w-[42px] md:w-[55px] w-[80px]"
               onClick={() => {
                 if(isNewBeehive){
                   createBeehive(name, admins).then(() => navigate("/dashboard"))
@@ -155,6 +157,7 @@ const EditCreateBeehivePage = ({  }) => {
           </Column>
         </Column>
       </Column>
+      <Footer className="bg-yellow_600 w-[100%]" />
     </>
   );
 };
