@@ -1,5 +1,6 @@
 @prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix jdbc: <http://d2rq.org/terms/jdbc/> .
 @prefix map: <file://app/mapping.ttl#> .
 
@@ -29,7 +30,81 @@ map:BeeEmail a d2rq:PropertyBridge;
     d2rq:property rdfs:email;
     d2rq:column "bee.email".
 
-map:BeePassword a d2rq:PropertyBridge;
-    d2rq:belongsToClassMap map:Bee;
-    d2rq:property rdfs:password;
-    d2rq:column "bee.password".
+map:Beehive a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class rdfs:Resource;
+    d2rq:uriPattern "http://localhost:2020/beehive/@@beehive.id@@".
+
+map:BeehiveId a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Beehive;
+    d2rq:property rdfs:label;
+    d2rq:column "beehive.id".
+
+map:BeehiveName a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Beehive;
+    d2rq:property rdfs:name;
+    d2rq:column "beehive.name".
+
+map:BeehiveOwner a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Beehive;
+    d2rq:property rdfs:range;
+    d2rq:refersToClassMap map:Bee;
+    d2rq:join "beehive.owner = bee.id".
+
+map:Honeycomb a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class rdfs:Resource;
+    d2rq:uriPattern "http://localhost:2020/honeycomb/@@honeycomb.sku@@".
+
+map:HoneycombName a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdfs:name;
+    d2rq:column "honeycomb.name".
+
+map:HoneycombSku a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdfs:label;
+    d2rq:column "honeycomb.sku".
+
+map:HoneycombDescription a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdfs:comment;
+    d2rq:column "honeycomb.description".
+
+map:HomeycombExpiry a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdf:value;
+    d2rq:column "honeycomb.expiry".
+
+map:HomeycombDatein a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdf:value;
+    d2rq:column "honeycomb.dateIn".
+
+map:HomeycombDateout a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdf:value;
+    d2rq:column "honeycomb.dateOut".
+
+map:HoneycombBeehive a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Honeycomb;
+    d2rq:property rdfs:range;
+    d2rq:refersToClassMap map:Beehive;
+    d2rq:join "honeycomb.beehive = beehive.id".
+
+map:BeehiveAdmin a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class rdfs:Resource;
+    d2rq:uriPattern "http://localhost:2020/bee_admin_beevive/@@bee.id@@-@@beehive.id@@".
+
+map:BeehiveAdminId a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:BeehiveAdmin;
+    d2rq:property rdfs:range;
+    d2rq:refersToClassMap map:Bee;
+    d2rq:join "bee.id = bee_admin_beehive.bee_id".
+
+map:AdminBeehiveId a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:BeehiveAdmin;
+    d2rq:property rdfs:range;
+    d2rq:refersToClassMap map:Beehive;
+    d2rq:join "beehive.id = bee_admin_beehive.beehive_id".

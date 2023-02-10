@@ -28,6 +28,11 @@ services:
       dockerfile: ./D2RQ-Dockerfile
     ports:
       - "${D2RQ_PORT}:2020"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_HOST: ${POSTGRES_HOST:-localhost}
+      POSTGRES_CONNECTION: ${POSTGRES_CONNECTION}
     depends_on:
       - db
 

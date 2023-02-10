@@ -16,7 +16,5 @@ RUN ant jar
 
 ADD mapping.ttl /app/d2rq-0.8.1
 
-RUN ls
-
 # Run the D2RQ server
 CMD ./d2r-server mapping.ttl
