@@ -7,11 +7,38 @@ const apiUrl = process.env["REACT_APP_API_URL"]
 const token = "token"
 const userData = "usrData"
 
+const sparql = "https://dbpedia.org/sparql"
+const query = (label) => `
+SELECT ?item ?itemLabel ?desc
+WHERE {
+  
+  ?item rdfs:label ?itemLabel ;
+rdfs:comment ?desc ;
+   rdfs:label "${label}"@en .
+  FILTER (lang(?itemLabel) = 'en')
+FILTER (lang(?desc) = 'en')
+}`
+
+const axiosInstaceSparql = axios.create({
+    timeout: 1000 * 120,
+    baseURL: sparql,
+})
+
 const axiosInstance = axios.create({
     timeout: 1000 * 120,
     baseURL: apiUrl,
     withCredentials: true,
 })
+
+export const querySparql = async (label) => {
+    const res = await axiosInstaceSparql.get("https://dbpedia.org/sparql", { headers: {'content-type' : 'application/x-www-form-urlencoded'}, params : {
+        query: {
+            format: "json",
+            query: query(label)
+        }
+    }})
+    return res.data
+} 
 
 const getHeaders = () => ({
     "Authorization": `Bearer ${cookies.get(token)}`

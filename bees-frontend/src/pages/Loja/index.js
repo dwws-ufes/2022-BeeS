@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Column, Text, Grid, Img, Row, Line, Button, Input } from "components";
 import Header from "components/Header/Header";
 import { useLocation, useNavigate } from "react-router-dom";
-import { createHoneycomb, deleteHoneycomb, getBeehive, getHoneycombsOfBeehive, updateHoneycomb } from "api";
+import { createHoneycomb, deleteHoneycomb, getBeehive, getHoneycombsOfBeehive, querySparql, updateHoneycomb } from "api";
 import "./style.css"
+
+
 
 const LojaPage = () => {
   const location = useLocation()
@@ -169,13 +171,16 @@ const LojaPage = () => {
                             let newVec = [...prev]
                             newVec[index].name = e.target.value
                             return newVec
-                          })}/> : <Text
+                          })}/> : <><Text
                           className="mt-[3px] text-white_A700 w-[auto]"
                           as="h4"
                           variant="h4"
                         >
                           {honeycomb.name}
-                        </Text>
+                        </Text><Text>{querySparql(honeycomb.name).then((data) => {
+                          console.log(data)
+                          return "teste"
+                        })}</Text></>
                         }
                         <Text
                           className="hidden mt-[3px] text-white_A700 w-[auto]"
