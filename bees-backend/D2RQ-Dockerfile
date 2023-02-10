@@ -1,0 +1,22 @@
+# Use an official Java runtime as the base image
+FROM frekele/ant
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Download the latest version of D2RQ
+RUN wget https://github.com/d2rq/d2rq/archive/refs/tags/v0.8.1.zip
+
+# Unzip the downloaded file
+RUN unzip v0.8.1.zip
+
+WORKDIR /app/d2rq-0.8.1
+
+RUN ant jar
+
+ADD mapping.ttl /app/d2rq-0.8.1
+
+RUN ls
+
+# Run the D2RQ server
+CMD ./d2r-server mapping.ttl

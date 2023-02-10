@@ -15,7 +15,7 @@ const RegisterPage = () => {
 
   function criarConta() {
     register(name, email, password)
-      .then(() => navigate("/dashboad"))
+      .then(() => navigate("/"))
       .catch((e) => console.log("Error: ", e.message))
   }
 

@@ -1,0 +1,35 @@
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix map: <file://app/mapping.ttl#> .
+
+map:database a d2rq:Database;
+    d2rq:jdbcDSN "jdbc:postgresql://db:5432/bees";
+    d2rq:jdbcDriver "org.postgresql.Driver";
+    d2rq:username "bees";
+    d2rq:password "bees".
+
+map:Bee a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class rdfs:Resource;
+    d2rq:uriPattern "http://localhost:2020/bee/@@bee.id@@".
+
+map:BeeId a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Bee;
+    d2rq:property rdfs:label;
+    d2rq:column "bee.id".
+
+map:BeeName a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Bee;
+    d2rq:property rdfs:name;
+    d2rq:column "bee.name".
+
+map:BeeEmail a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Bee;
+    d2rq:property rdfs:email;
+    d2rq:column "bee.email".
+
+map:BeePassword a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Bee;
+    d2rq:property rdfs:password;
+    d2rq:column "bee.password".

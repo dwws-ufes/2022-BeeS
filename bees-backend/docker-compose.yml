@@ -5,6 +5,7 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_HOST_AUTH_METHOD: trust
       PGDATA: /data/postgres
     volumes:
        - postgres:/data/postgres
@@ -20,6 +21,16 @@ services:
     depends_on:
       - db
 
+  d2rq:
+    container_name: bees-rdfmapper
+    build:
+      context: .
+      dockerfile: ./D2RQ-Dockerfile
+    ports:
+      - "${D2RQ_PORT}:2020"
+    depends_on:
+      - db
+
   app:
     container_name: bees-app
     build: .
@@ -31,6 +42,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
       POSTGRES_HOST: ${POSTGRES_HOST:-localhost}
+      FRONTEND_CORS_URL: ${FRONTEND_CORS_URL}
       NODE_ENV: "prod"
     ports:
       - ${PORT}:${PORT}
